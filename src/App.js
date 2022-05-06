@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/apple")
+    fetch("https://protected-badlands-97400.herokuapp.com/apple")
       .then((res) => res.json())
       .then((d) => setData(d));
   }, []);
