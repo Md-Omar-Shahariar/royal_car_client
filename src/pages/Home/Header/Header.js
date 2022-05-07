@@ -39,6 +39,9 @@ const Header = () => {
                   <Nav.Link as={CustomLink} to="/myItem">
                     My Item
                   </Nav.Link>
+                  <Nav.Link as={CustomLink} to="/addItem">
+                    Add Item
+                  </Nav.Link>
                   <button
                     className="btn btn-warning h-50 my-auto fw-bold"
                     onClick={handleSignOut}

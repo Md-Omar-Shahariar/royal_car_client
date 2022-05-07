@@ -1,13 +1,19 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ product }) => {
+  const navigate = useNavigate();
+  const handleNavigate = (id) => {
+    const url = `/inventory/${id}`;
+    navigate(url);
+  };
   return (
     <div>
       <div className="d-md-flex border rounded border-primary m-3 p-3 bg-dark text-warning align-items-center">
         <img
-          className="rounded mx-2"
+          className="rounded  img-fluid"
           style={{ height: "200px" }}
           src={product.img}
           alt=""
@@ -30,7 +36,10 @@ const Product = ({ product }) => {
           </p>
         </div>
         <div>
-          <button className="d-md-flex align-items-center">
+          <button
+            className="d-md-flex align-items-center"
+            onClick={() => handleNavigate(product._id)}
+          >
             <FontAwesomeIcon
               className="mx-1"
               icon={faArrowTrendUp}

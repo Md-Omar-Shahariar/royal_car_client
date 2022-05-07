@@ -8,6 +8,7 @@ import {
 import auth from "../../../firebase.init";
 import { Link, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
+import SocialLogin from "../../Shared/SocialLogin";
 
 const Register = () => {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
@@ -39,60 +40,66 @@ const Register = () => {
   };
 
   return (
-    <div className="my-5 ">
-      <Form className="w-50 m-auto form">
-        <Form.Group className="mb-3" controlId="formBasic">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            required
-            ref={nameRef}
-            type="text"
-            placeholder=" Name"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            required
-            ref={emailRef}
-            type="email"
-            placeholder="Enter email"
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+    <>
+      <div className="my-5 ">
+        <Form className="w-50 m-auto form">
+          <Form.Group className="mb-3" controlId="formBasic">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              required
+              ref={nameRef}
+              type="text"
+              placeholder=" Name"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              required
+              ref={emailRef}
+              type="email"
+              placeholder="Enter email"
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            required
-            ref={passwordRef}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
-        {errorMessage}
-        <button
-          onClick={handleSubmit}
-          type="submit"
-          className="btn bg-black  d-block mx-auto golden"
-        >
-          Sign-Up
-        </button>
-
-        <p className="mt-3 text-center">
-          Don't Have an Account?
-          <span
-            onClick={navigateLogin}
-            className="btn btn-link text-decoration-none "
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              ref={passwordRef}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3"
+            controlId="formBasicCheckbox"
+          ></Form.Group>
+          {errorMessage}
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="btn bg-black  d-block mx-auto golden"
           >
-            Log-In
-          </span>
-        </p>
-      </Form>
-    </div>
+            Sign-Up
+          </button>
+
+          <p className="mt-3 text-center">
+            Don't Have an Account?
+            <span
+              onClick={navigateLogin}
+              className="btn btn-link text-decoration-none "
+            >
+              Log-In
+            </span>
+          </p>
+        </Form>
+      </div>
+      <SocialLogin></SocialLogin>
+    </>
   );
 };
 

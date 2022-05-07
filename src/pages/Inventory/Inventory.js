@@ -4,7 +4,7 @@ import Product from "./Product/Product";
 const Inventory = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("https://protected-badlands-97400.herokuapp.com/service")
+    fetch("https://protected-badlands-97400.herokuapp.com/product")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
