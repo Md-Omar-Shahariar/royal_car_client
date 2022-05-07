@@ -1,9 +1,22 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { faArrowTrendUp, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const Product = ({ product }) => {
+  const location = useLocation();
+  console.log(location.pathname);
+  const [user] = useAuthState(auth);
+  let flag = null;
+  if (user) {
+    if (location.pathname === "/myItem") {
+      flag = 1;
+    } else {
+      flag = null;
+    }
+  }
   const navigate = useNavigate();
   const handleNavigate = (id) => {
     const url = `/inventory/${id}`;
@@ -35,9 +48,9 @@ const Product = ({ product }) => {
             <span>{product.description}</span>
           </p>
         </div>
-        <div>
+        <div className="d-flex">
           <button
-            className="d-md-flex align-items-center"
+            className="d-md-flex align-items-center btn btn-warning me-2"
             onClick={() => handleNavigate(product._id)}
           >
             <FontAwesomeIcon
@@ -46,6 +59,18 @@ const Product = ({ product }) => {
             ></FontAwesomeIcon>
             Update
           </button>
+          {flag && (
+            <button
+              className="d-md-flex align-items-center btn btn-warning"
+              onClick={() => handleNavigate(product._id)}
+            >
+              <FontAwesomeIcon
+                className="mx-1"
+                icon={faTrash}
+              ></FontAwesomeIcon>
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>
