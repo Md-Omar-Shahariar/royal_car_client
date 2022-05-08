@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTrendUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ product }) => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch("https://protected-badlands-97400.herokuapp.com/product")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, [products]);
   const location = useLocation();
   const [user] = useAuthState(auth);
   let flag = null;
   if (user) {
-    if (location.pathname === "/myItem") {
+    if (location.pathname === "/myItem" || location.pathname === "/inventory") {
       flag = 1;
     } else {
       flag = null;
@@ -20,6 +28,21 @@ const Product = ({ product }) => {
   const handleNavigate = (id) => {
     const url = `/inventory/${id}`;
     navigate(url);
+  };
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure?");
+    if (proceed) {
+      const url = `https://protected-badlands-97400.herokuapp.com/product/${id}`;
+      fetch(url, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const remaining = products.filter((product) => product._id !== id);
+          setProducts(remaining);
+          toast("Item Deleted");
+        });
+    }
   };
   return (
     <div>
@@ -61,7 +84,7 @@ const Product = ({ product }) => {
           {flag && (
             <button
               className="d-md-flex align-items-center btn btn-warning fw-bold"
-              onClick={() => handleNavigate(product._id)}
+              onClick={() => handleDelete(product._id)}
             >
               <FontAwesomeIcon
                 className="mx-1"
@@ -72,6 +95,7 @@ const Product = ({ product }) => {
           )}
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

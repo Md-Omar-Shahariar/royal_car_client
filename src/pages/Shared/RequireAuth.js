@@ -7,15 +7,12 @@ const RequireAuth = ({ children }) => {
   const [user, loading] = useAuthState(auth);
   const location = useLocation();
 
-  async function run() {
-    await user;
-    if (!user) {
-      return (
-        <Navigate to={"/login"} state={{ from: location }} replace></Navigate>
-      );
-    }
+  if (!user) {
+    return (
+      <Navigate to={"/login"} state={{ from: location }} replace></Navigate>
+    );
   }
-  run().catch(console.dir);
+
   return children;
 };
 

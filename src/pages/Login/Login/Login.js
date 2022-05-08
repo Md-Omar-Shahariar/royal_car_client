@@ -55,9 +55,13 @@ const Login = () => {
     message = error.message;
   }
   return (
-    <>
+    <div className="min-vh-100 container d-flex flex-column align-items-center justify-content-center">
+      <h2 className="pb-3">Log-In</h2>
       <div className="container d-flex align-items-center justify-content-center ">
-        <Form className="w-50 m-auto form" onSubmit={handleSubmit}>
+        <Form
+          className="w-50 m-auto form border p-3 shadow-lg"
+          onSubmit={handleSubmit}
+        >
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -111,7 +115,7 @@ const Login = () => {
       </div>
       <SocialLogin></SocialLogin>
       <ToastContainer></ToastContainer>
-    </>
+    </div>
   );
 };
 

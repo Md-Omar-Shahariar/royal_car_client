@@ -40,9 +40,10 @@ const Register = () => {
   };
 
   return (
-    <>
-      <div className="my-5 ">
-        <Form className="w-50 m-auto form">
+    <div className="min-vh-100 container d-flex flex-column align-items-center justify-content-center">
+      <h2 className="pb-3">Register</h2>
+      <div className="container d-flex align-items-center justify-content-center ">
+        <Form className="w-50 m-auto form border rounded-3 p-3 shadow-lg">
           <Form.Group className="mb-3" controlId="formBasic">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -60,9 +61,6 @@ const Register = () => {
               type="email"
               placeholder="Enter email"
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -99,7 +97,7 @@ const Register = () => {
         </Form>
       </div>
       <SocialLogin></SocialLogin>
-    </>
+    </div>
   );
 };
 
