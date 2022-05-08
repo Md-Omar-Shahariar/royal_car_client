@@ -2,6 +2,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useLocation, useNavigate } from "react-router-dom";
 import google from "../../img/PinClipart.com_google-clip-art-free_5300214.png";
+import Loading from "./Loading/Loading";
 
 const SocialLogin = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -9,6 +10,9 @@ const SocialLogin = () => {
   const handleSignInWithGoogle = () => {
     signInWithGoogle();
   };
+  if (loading) {
+    <Loading></Loading>;
+  }
 
   const navigate = useNavigate();
   const location = useLocation();

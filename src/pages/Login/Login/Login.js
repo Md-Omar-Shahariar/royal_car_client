@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import SocialLogin from "../../Shared/SocialLogin";
 import { ToastContainer, toast } from "react-toastify";
+import Loading from "../../Shared/Loading/Loading";
 
 const Login = () => {
   const handleSubmit = (event) => {
@@ -26,6 +27,9 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  if (loading) {
+    <Loading></Loading>;
+  }
 
   const resetPassword = async () => {
     const email = emailRef.current.value;

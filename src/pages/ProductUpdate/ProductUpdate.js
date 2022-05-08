@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const ProductUpdate = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch("https://protected-badlands-97400.herokuapp.com/product")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
 
   const url = `https://protected-badlands-97400.herokuapp.com/product/${id}`;
   useEffect(() => {
@@ -11,6 +20,15 @@ const ProductUpdate = () => {
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, []);
+  const handleDelivered = () => {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product._id),
+    });
+  };
 
   return (
     <div className="pt-5 bg-black text-warning ">
@@ -42,8 +60,20 @@ const ProductUpdate = () => {
               />
             </form>
           </div>
-          <button className="btn btn-warning fw-bold">Delivered</button>
+          <button onClick={handleDelivered} className="btn btn-warning fw-bold">
+            Delivered
+          </button>
         </div>
+        <Link
+          className=" text-warning"
+          style={{ textDecoration: "none" }}
+          to={"/inventory"}
+        >
+          <div className="d-flex align-items-center justify-content-end me-3">
+            <span className="mx-3">Manage Inventory</span>
+            <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
+          </div>
+        </Link>
       </div>
     </div>
   );
