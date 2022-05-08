@@ -7,7 +7,6 @@ import auth from "../../../firebase.init";
 
 const Product = ({ product }) => {
   const location = useLocation();
-  console.log(location.pathname);
   const [user] = useAuthState(auth);
   let flag = null;
   if (user) {
@@ -50,7 +49,7 @@ const Product = ({ product }) => {
         </div>
         <div className="d-flex">
           <button
-            className="d-md-flex align-items-center btn btn-warning me-2"
+            className="d-md-flex align-items-center btn btn-warning me-2 fw-bold"
             onClick={() => handleNavigate(product._id)}
           >
             <FontAwesomeIcon
@@ -61,7 +60,7 @@ const Product = ({ product }) => {
           </button>
           {flag && (
             <button
-              className="d-md-flex align-items-center btn btn-warning"
+              className="d-md-flex align-items-center btn btn-warning fw-bold"
               onClick={() => handleNavigate(product._id)}
             >
               <FontAwesomeIcon
