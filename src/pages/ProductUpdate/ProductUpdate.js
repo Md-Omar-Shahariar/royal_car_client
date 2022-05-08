@@ -21,13 +21,15 @@ const ProductUpdate = () => {
       .then((data) => setProduct(data));
   }, []);
   const handleDelivered = () => {
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(product._id),
-    });
+    // fetch(url, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({}),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
   };
 
   return (
