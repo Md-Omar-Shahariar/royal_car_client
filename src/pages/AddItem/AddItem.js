@@ -21,6 +21,7 @@ const AddItem = () => {
   } = useForm();
   console.log(errors);
   const onSubmit = (data) => {
+    console.log(data.quantity);
     data.email = user.email;
     reset();
     const url = `https://protected-badlands-97400.herokuapp.com/product`;
@@ -40,14 +41,14 @@ const AddItem = () => {
   };
   return (
     <div className="container min-vh-100 pt-5">
-      <h3>
+      <h3 className="text-warning fw-bold">
         <span>Add Item</span>
       </h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=" d-flex flex-column p-3 w-100 mx-auto  "
       >
-        <div className="w-50 mx-auto text-center d-flex flex-column justify-content-center border shadow-lg p-4 rounded-3">
+        <div className="w-50 mx-auto text-center d-flex flex-column justify-content-center border border-warning shadow-lg p-4 rounded-3">
           <input
             placeholder="Name"
             className="mb-2"
@@ -75,13 +76,13 @@ const AddItem = () => {
             placeholder="Supplier"
             className="mb-2"
             type="text"
-            {...register("Supplier", { required: true, maxLength: 30 })}
+            {...register("supplier_name", { required: true, maxLength: 30 })}
           />
           <input
             placeholder="Quantity"
             className="mb-2"
             type="number"
-            {...register("quantity", { required: true, maxLength: 30 })}
+            {...register("quantity", { required: true, valueAsNumber: true })}
           />
           <input
             placeholder="Photo URL"

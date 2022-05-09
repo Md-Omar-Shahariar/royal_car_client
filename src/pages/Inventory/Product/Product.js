@@ -9,11 +9,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ product }) => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     fetch("https://protected-badlands-97400.herokuapp.com/product")
       .then((res) => res.json())
       .then((data) => setProducts(data));
-  }, [products]);
+  }, []);
   const location = useLocation();
   const [user] = useAuthState(auth);
   let flag = null;
@@ -41,34 +42,41 @@ const Product = ({ product }) => {
           const remaining = products.filter((product) => product._id !== id);
           setProducts(remaining);
           toast("Item Deleted");
+          if (location.pathname === "/myItem") {
+            navigate("/inventory");
+          } else {
+            navigate("/myItem");
+          }
         });
     }
   };
   return (
     <div>
-      <div className="d-md-flex border rounded border-primary m-3 p-3 bg-dark text-warning align-items-center">
-        <img
-          className="rounded  img-fluid"
-          style={{ height: "200px" }}
-          src={product.img}
-          alt=""
-        />
-        <div className="text-start ms-3">
-          <h3>
-            <span>{product.name}</span>
-          </h3>
-          <p>
-            Price: <span>{product.price}</span>
-          </p>
-          <p>
-            Available: <span>{product.quantity}</span>
-          </p>
-          <p>
-            Supplier: <span>{product.supplier_name}</span>
-          </p>
-          <p>
-            <span>{product.description}</span>
-          </p>
+      <div className="d-md-flex border rounded border-warning m-3 justify-content-between p-3 bg-dark text-warning align-items-center">
+        <div className="d-flex">
+          <img
+            className="rounded  img-fluid"
+            style={{ height: "200px" }}
+            src={product.img}
+            alt=""
+          />
+          <div className="text-start ms-3">
+            <h3>
+              <span>{product.name}</span>
+            </h3>
+            <p>
+              Price: <span>{product.price}</span>
+            </p>
+            <p>
+              Available: <span>{product.quantity}</span>
+            </p>
+            <p>
+              Supplier: <span>{product.supplier_name}</span>
+            </p>
+            <p>
+              <span>{product.description}</span>
+            </p>
+          </div>
         </div>
         <div className="d-flex">
           <button

@@ -10,12 +10,12 @@ const SocialLogin = () => {
   const handleSignInWithGoogle = () => {
     signInWithGoogle();
   };
-  if (loading) {
-    <Loading></Loading>;
-  }
-
   const navigate = useNavigate();
   const location = useLocation();
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
   const from = location.state?.from?.pathname || "/";
 
   if (user) {
@@ -30,15 +30,15 @@ const SocialLogin = () => {
     <div className="container">
       {errorElement}
       <div className="d-flex align-items-center">
-        <div style={{ height: "1px" }} className="bg-primary w-50 "></div>
+        <div style={{ height: "1px" }} className="bg-warning w-50 "></div>
         <p className="mt-2 px-2">or</p>
-        <div style={{ height: "1px" }} className="bg-primary w-50 "></div>
+        <div style={{ height: "1px" }} className="bg-warning w-50 "></div>
       </div>
 
       <div>
         <button
           onClick={handleSignInWithGoogle}
-          className="my-2 btn bg-black text-white w-50 d-flex justify-content-center mx-auto align-items-center"
+          className="my-2 btn bg-black text-warning border border-warning w-50 d-flex justify-content-center mx-auto align-items-center mb-5"
         >
           <img style={{ width: "30px", height: "30px" }} src={google} alt="" />
           <span className="px-2">Google Sign In</span>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div className="text-warning container py-5">
+    <div className="text-warning container min-vh-100 d-flex flex-column justify-content-center py-5">
       <h2>Q:1--Difference between javascript and nodejs</h2>
       <p>
         Javascript is an implementation of ECMAScript, a standard defining the

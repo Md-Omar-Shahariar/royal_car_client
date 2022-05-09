@@ -59,11 +59,11 @@ const Login = () => {
     message = error.message;
   }
   return (
-    <div className="min-vh-100 container d-flex flex-column align-items-center justify-content-center">
+    <div className="min-vh-100 container d-flex flex-column align-items-center justify-content-center text-warning mt-5 ">
       <h2 className="pb-3">Log-In</h2>
       <div className="container d-flex align-items-center justify-content-center ">
         <Form
-          className="w-50 m-auto form border p-3 shadow-lg"
+          className="w-50 m-auto form border border-warning rounded p-3 shadow-lg"
           onSubmit={handleSubmit}
         >
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -92,7 +92,7 @@ const Login = () => {
           {message}
           <button
             type="submit"
-            className="btn bg-black  d-block mx-auto golden"
+            className="btn btn-warning fw-bold  d-block mx-auto golden"
           >
             Log-In
           </button>

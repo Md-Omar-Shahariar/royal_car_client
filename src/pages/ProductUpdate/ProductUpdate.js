@@ -3,37 +3,71 @@ import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import Loading from "../Shared/Loading/Loading";
 
 const ProductUpdate = () => {
+  const [bool, setBool] = useState(false);
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch("https://protected-badlands-97400.herokuapp.com/product")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  //   useEffect(() => {
+  //     fetch("https://protected-badlands-97400.herokuapp.com/product")
+  //       .then((res) => res.json())
+  //       .then((data) => setProducts(data));
+  //   }, []);
+  const [flag, setFlag] = useState(null);
 
   const url = `https://protected-badlands-97400.herokuapp.com/product/${id}`;
   useEffect(() => {
-    fetch(url)
+    function fe() {
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data);
+          setFlag(true);
+        });
+    }
+    fe();
+  }, [bool]);
+  const handleReStock = (val) => {
+    fetch(
+      `https://protected-badlands-97400.herokuapp.com/product/${id}?value=${val}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ val }),
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setProduct(data));
-  }, []);
-  const handleDelivered = () => {
-    // fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({}),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
+      .then((data) => {
+        setFlag(!flag);
+        setBool(!bool);
+      });
+  };
+  const [value, setValue] = useState();
+  const handleDelivered = (val) => {
+    fetch(
+      `https://protected-badlands-97400.herokuapp.com/product/${id}?value=${val}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ val }),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setFlag(!flag);
+        setBool(!bool);
+      });
   };
 
   return (
     <div className="pt-5 bg-black text-warning ">
+      {!flag && <Loading></Loading>}
       <div className="container py-3">
         <img className="img-fluid" src={product.img} alt="" />
         <div className="py-3">
@@ -53,16 +87,30 @@ const ProductUpdate = () => {
         </div>
         <div className="d-flex justify-content-center align-items-center">
           <div className="pe-2 d-flex">
-            <form action="">
-              <input className="me-3" type="number" name="re-stock" id="" />
-              <input
-                className="btn btn-warning fw-bold"
-                type="submit"
-                value="Re-Stock"
-              />
-            </form>
+            <input
+              className="me-3"
+              type="number"
+              onChange={(e) => {
+                if (e.target.value === NaN) {
+                  setValue(0);
+                } else {
+                  setValue(e.target.value);
+                }
+              }}
+            />
+            <button
+              onClick={() => {
+                handleReStock(`${value}`);
+              }}
+              className="btn btn-warning fw-bold"
+            >
+              Re-Stock
+            </button>
           </div>
-          <button onClick={handleDelivered} className="btn btn-warning fw-bold">
+          <button
+            onClick={() => handleDelivered("-1")}
+            className="btn btn-warning fw-bold"
+          >
             Delivered
           </button>
         </div>

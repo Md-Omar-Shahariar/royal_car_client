@@ -8,15 +8,21 @@ const MyItem = () => {
   const [user] = useAuthState(auth);
 
   const [products, setProducts] = useState([]);
+  const [flag, setFlag] = useState(null);
 
   useEffect(() => {
-    fetch("https://protected-badlands-97400.herokuapp.com/product")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    function fe() {
+      fetch("https://protected-badlands-97400.herokuapp.com/product")
+        .then((res) => res.json())
+        .then((data) => {
+          setProducts(data);
+          setFlag(1);
+        });
+    }
+    fe();
   }, []);
 
   const myProduct = products.filter((p) => p.gmail === user?.email);
-  console.log(myProduct);
 
   //   const filter = products.filter(product =>{
   //       if(product.email == )
@@ -24,10 +30,24 @@ const MyItem = () => {
 
   return (
     <div>
-      <h2>Inventory</h2>
-      {myProduct.map((product) => (
-        <Product key={product._id} product={product}></Product>
-      ))}
+      {!flag && (
+        <>
+          <div className="con">
+            <span>~ My Items ~</span>
+          </div>
+          <Loading></Loading>
+        </>
+      )}
+      {flag && (
+        <>
+          <div className="bon">
+            <span>~ My Items ~</span>
+          </div>
+          {myProduct.map((product) => (
+            <Product key={product._id} product={product}></Product>
+          ))}
+        </>
+      )}
     </div>
   );
 };

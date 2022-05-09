@@ -40,10 +40,10 @@ const Register = () => {
   };
 
   return (
-    <div className="min-vh-100 container d-flex flex-column align-items-center justify-content-center">
+    <div className="min-vh-100 container text-warning d-flex flex-column align-items-center justify-content-center mt-5">
       <h2 className="pb-3">Register</h2>
       <div className="container d-flex align-items-center justify-content-center ">
-        <Form className="w-50 m-auto form border rounded-3 p-3 shadow-lg">
+        <Form className="w-50 m-auto form border border-warning rounded-3 p-3 shadow-lg">
           <Form.Group className="mb-3" controlId="formBasic">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -80,7 +80,7 @@ const Register = () => {
           <button
             onClick={handleSubmit}
             type="submit"
-            className="btn bg-black  d-block mx-auto golden"
+            className="btn btn-warning fw-bold  d-block mx-auto golden"
           >
             Sign-Up
           </button>
