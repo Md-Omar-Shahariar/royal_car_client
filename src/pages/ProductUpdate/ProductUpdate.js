@@ -90,11 +90,15 @@ const ProductUpdate = () => {
             <input
               className="me-3"
               type="number"
-              onChange={(e) => {
-                if (e.target.value === NaN) {
+              onBlur={(e) => {
+                if (e.target.value === NaN || e.target.value < 0) {
                   setValue(0);
+
+                  alert("Enter a Positive Value");
+                  e.target.value = "";
                 } else {
                   setValue(e.target.value);
+                  e.target.value = "";
                 }
               }}
             />

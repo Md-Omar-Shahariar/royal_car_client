@@ -41,16 +41,16 @@ const Items = () => {
           {products.slice(0, 6).map((product) => (
             <Product key={product._id} product={product}></Product>
           ))}
-          <Link
-            className=" text-warning"
-            style={{ textDecoration: "none" }}
-            to={"/inventory"}
-          >
-            <div className="d-flex align-items-center justify-content-end me-3">
+          <div className="d-flex align-items-center justify-content-end me-3">
+            <Link
+              className=" text-warning"
+              style={{ textDecoration: "none" }}
+              to={"/inventory"}
+            >
               <span className="mx-3">Manage Inventory</span>
               <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
-            </div>
-          </Link>
+            </Link>
+          </div>
         </>
       )}
     </div>

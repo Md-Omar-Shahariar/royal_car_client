@@ -92,7 +92,7 @@ const AddItem = () => {
           />
           <input
             type="submit"
-            value="Add Service"
+            value="Add"
             className="btn btn-warning fw-bold"
           />
         </div>

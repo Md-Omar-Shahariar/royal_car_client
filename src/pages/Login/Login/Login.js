@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
-import { Form, Toast } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import {
   useSendPasswordResetEmail,
-  useSendEmailVerification,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,18 +10,9 @@ import auth from "../../../firebase.init";
 import SocialLogin from "../../Shared/SocialLogin";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../Shared/Loading/Loading";
+import axios from "axios";
 
 const Login = () => {
-  const [sendEmailVerification, varificationSending, varError] =
-    useSendEmailVerification(auth);
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    signInWithEmailAndPassword(email, password);
-    await sendEmailVerification();
-    toast("Please Verify");
-  };
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
@@ -32,9 +22,21 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
   if (loading) {
     <Loading></Loading>;
   }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    await signInWithEmailAndPassword(email, password);
+    const { data } = await axios.post("http://localhost:5000/login", { email });
+    console.log(data);
+    localStorage.setItem("accessToken", data.accessToken);
+    navigate(from, { replace: true });
+  };
 
   const resetPassword = async () => {
     const email = emailRef.current.value;
@@ -52,7 +54,7 @@ const Login = () => {
   };
 
   if (user) {
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
 
   const handleRegister = () => {

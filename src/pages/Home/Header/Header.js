@@ -14,7 +14,9 @@ const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand to="/">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand to="/" className=" text-warning fw-bold">
+          Royal CARS
+        </Navbar.Brand>
         <div>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
