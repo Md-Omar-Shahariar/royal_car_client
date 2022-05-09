@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Toast } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import {
   useSendPasswordResetEmail,
+  useSendEmailVerification,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,11 +13,15 @@ import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../Shared/Loading/Loading";
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const [sendEmailVerification, varificationSending, varError] =
+    useSendEmailVerification(auth);
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     signInWithEmailAndPassword(email, password);
+    await sendEmailVerification();
+    toast("Please Verify");
   };
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);

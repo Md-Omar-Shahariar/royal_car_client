@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
 import { Form } from "react-bootstrap";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import {
   useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
@@ -11,6 +13,8 @@ import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../Shared/SocialLogin";
 
 const Register = () => {
+  const [sendEmailVerification, sending, Error] =
+    useSendEmailVerification(auth);
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -26,6 +30,8 @@ const Register = () => {
 
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName: name });
+    await sendEmailVerification();
+    toast("Please Verify");
   };
   if (user) {
     navigate("/home");
