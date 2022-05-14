@@ -51,7 +51,7 @@ const Product = ({ product }) => {
     }
   };
   return (
-    <div>
+    <div className="w-100">
       <div className="d-md-flex border rounded border-warning m-3 justify-content-between p-3 bg-dark text-warning align-items-center">
         <div className="d-md-flex">
           <img

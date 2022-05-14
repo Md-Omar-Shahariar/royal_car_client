@@ -85,8 +85,8 @@ const ProductUpdate = () => {
             <span>{product.description}</span>
           </p>
         </div>
-        <div className="d-flex justify-content-center align-items-center">
-          <div className="pe-2 d-flex">
+        <div className="d-md-flex justify-content-center align-items-center">
+          <div className="pe-2 d-md-flex">
             <input
               className="me-3"
               type="number"
@@ -106,14 +106,14 @@ const ProductUpdate = () => {
               onClick={() => {
                 handleReStock(`${value}`);
               }}
-              className="btn btn-warning fw-bold"
+              className="btn btn-warning fw-bold mt-2 mt-md-0"
             >
               Re-Stock
             </button>
           </div>
           <button
             onClick={() => handleDelivered("-1")}
-            className="btn btn-warning fw-bold"
+            className="btn btn-warning fw-bold mt-2 mt-md-0"
           >
             Delivered
           </button>
