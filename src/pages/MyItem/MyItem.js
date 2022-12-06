@@ -30,7 +30,7 @@ const MyItem = () => {
         //     setFlag(1);
         //   });
         const { data } = await axios.get(
-          `https://protected-badlands-97400.herokuapp.com/myItem?email=${user.email}`,
+          `https://royal-cars-server.onrender.com/myItem?email=${user.email}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,

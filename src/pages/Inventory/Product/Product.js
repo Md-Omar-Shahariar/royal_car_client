@@ -11,7 +11,7 @@ const Product = ({ product }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://protected-badlands-97400.herokuapp.com/product")
+    fetch("https://royal-cars-server.onrender.com/product")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
@@ -33,7 +33,7 @@ const Product = ({ product }) => {
   const handleDelete = (id) => {
     const proceed = window.confirm("Are you sure?");
     if (proceed) {
-      const url = `https://protected-badlands-97400.herokuapp.com/product/${id}`;
+      const url = `https://royal-cars-server.onrender.com/product/${id}`;
       fetch(url, {
         method: "DELETE",
       })

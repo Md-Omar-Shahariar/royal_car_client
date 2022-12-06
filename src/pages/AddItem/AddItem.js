@@ -24,7 +24,7 @@ const AddItem = () => {
     console.log(data.quantity);
     data.gmail = user.email;
     reset();
-    const url = `https://protected-badlands-97400.herokuapp.com/product`;
+    const url = `https://royal-cars-server.onrender.com/product`;
     fetch(url, {
       method: "POST",
       headers: {

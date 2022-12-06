@@ -11,13 +11,13 @@ const ProductUpdate = () => {
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   //   useEffect(() => {
-  //     fetch("https://protected-badlands-97400.herokuapp.com/product")
+  //     fetch("https://royal-cars-server.onrender.com/product")
   //       .then((res) => res.json())
   //       .then((data) => setProducts(data));
   //   }, []);
   const [flag, setFlag] = useState(null);
 
-  const url = `https://protected-badlands-97400.herokuapp.com/product/${id}`;
+  const url = `https://royal-cars-server.onrender.com/product/${id}`;
   useEffect(() => {
     function fe() {
       fetch(url)
@@ -30,16 +30,13 @@ const ProductUpdate = () => {
     fe();
   }, [bool]);
   const handleReStock = (val) => {
-    fetch(
-      `https://protected-badlands-97400.herokuapp.com/product/${id}?value=${val}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ val }),
-      }
-    )
+    fetch(`https://royal-cars-server.onrender.com/product/${id}?value=${val}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ val }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setFlag(!flag);
@@ -48,16 +45,13 @@ const ProductUpdate = () => {
   };
   const [value, setValue] = useState();
   const handleDelivered = (val) => {
-    fetch(
-      `https://protected-badlands-97400.herokuapp.com/product/${id}?value=${val}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ val }),
-      }
-    )
+    fetch(`https://royal-cars-server.onrender.com/product/${id}?value=${val}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ val }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setFlag(!flag);

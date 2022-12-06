@@ -33,7 +33,7 @@ const Login = () => {
     const password = passwordRef.current.value;
     await signInWithEmailAndPassword(email, password);
     const { data } = await axios.post(
-      "https://protected-badlands-97400.herokuapp.com/login",
+      "https://royal-cars-server.onrender.com/login",
       { email }
     );
     console.log(data);
